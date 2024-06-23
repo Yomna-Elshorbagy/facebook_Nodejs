@@ -27,7 +27,7 @@ export const signup = async (req,res,next)=>{
    const user = await userModel.create({
     username,
     email,
-    password:hashedPass
+    password:hashedPass,
    });
 
    return res.status(201).json({message: 'User added sucessfully', user})
@@ -43,6 +43,11 @@ export const logIn = async (req,res,next)=>{
         }
     });
 
+    const updateStatus = await userModel.update({
+        status: "online" 
+    }, {
+        where: {email}
+    })
     const isPass = bcyrpt.compareSync(password ,isUser.password );
 
     if (!isUser || !isPass){
@@ -57,11 +62,67 @@ export const getAllUsers = async(req, res, next)=>{
     res.json({message: 'allUsers are : ', isUser})
 };
 
-export const logout = (req, res) => {
-    res.json({ message: 'Logout successful' });
+export const updateUser = async (req,res)=>{
+    const {username, email, password} = req.body;
+    const {id}= req.params;
+
+    const isUser = await userModel.findOne({
+        where:{id}
+    });
+    if(!isUser){
+        return res.json({message:'user Not found'})
+    };
+    const [updatedUser] = await userModel.update({
+        username,
+        email,
+        password
+    }, {
+        where:{
+        id: req.params.id
+    }
+   });
+   res.status(200).json({message:'user Updated Sucessfully',updatedUser})
+ };
+
+ export const deleteUser = async (req,res)=>{
+    const {id}= req.params;
+    const isUser = await userModel.findOne({
+        where:{id,}
+    });
+    if(!isUser){
+        return res.status(404).json({message:'user Not found'})
+    };
+    const deletedUser = await userModel.destroy({
+        where: {
+            id :id
+        }
+    });
+    res.json({message:'user deleted Sucessfully',deletedUser})
+ };
+
+export const logout = async(req, res) => {
+    const {id}= req.params;
+
+    const isUser = await userModel.findOne({
+        where:{id,}
+    });
+    if(!isUser){
+        return res.status(404).json({message:'user Not found'})
+    };
+    if (!isUser.status.includes("online")) {
+        return res.status(400).json({ message: 'User is not online' });
+    }
+
+    const [updatedUser] = await userModel.update(
+        { status: "online" },
+        {
+        where:{
+        id : id
+    }
+   });
+    res.json({ message: 'Logout successful' ,updatedUser});
   };
 
-  
 export const getUserPostAndComments = async (req, res) => {
     const { userId, postId } = req.params;
  

@@ -31,7 +31,6 @@ export const addPost = async(req,res,next)=>{
 
 export const updatePost = async(req,res,next)=>{
     const {title,content, author} = req.body;
-
     const postUpdated = await postsModel.update({
         title,
         content
@@ -45,12 +44,12 @@ export const updatePost = async(req,res,next)=>{
 
 export const deletePost = async(req,res,next)=>{
     const {id} = req.params;
-    const postUpdated = await postsModel.destroy({
+    const postDeleted = await postsModel.destroy({
         where: {
             id :id
         }
     });
-    res.json({message:'post deleted Sucessfully ', postUpdated})
+    res.json({message:'post deleted Sucessfully ', postDeleted})
 };
 
 export const getPostWithAuthor = async (req, res) => {

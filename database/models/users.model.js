@@ -14,7 +14,13 @@ const userModel = sequelize.define('user',{
     password: {
         type: DataTypes.STRING(100),
         allowNull: false
+    }, 
+    status : {
+        type: DataTypes.STRING(100),
+        // type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: ["offline"]
     }
+    
 });
 
 export default userModel;
