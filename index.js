@@ -1,10 +1,10 @@
 import express from 'express'
 import 'dotenv/config'; 
 import cors from 'cors'
-import userRouter from './modules/users/users.routes.js';
-import postRouter from './modules/posts/posts.routes.js';
-import commentRouter from './modules/comments/comments.routes.js';
 import sequelize from './database/connection.js';
+import userRouter from './src/modules/users/users.routes.js';
+import postRouter from './src/modules/posts/posts.routes.js';
+import commentRouter from './src/modules/comments/comments.routes.js';
 
 
 const server = express()

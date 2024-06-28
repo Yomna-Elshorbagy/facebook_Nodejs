@@ -1,5 +1,5 @@
-import commentsModel from "../database/models/comments.model.js";
-import postsModel from "../database/models/posts.models.js"
+import commentsModel from "../../database/models/comments.model.js";
+import postsModel from "../../database/models/posts.models.js";
 
 
 export const isOwner =async (req,res,next)=>{

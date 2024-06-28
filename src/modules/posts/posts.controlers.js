@@ -1,5 +1,5 @@
-import postsModel from "../../database/models/posts.models.js"
-import userModel from "../../database/models/users.model.js";
+import postsModel from "../../../database/models/posts.models.js";
+import userModel from "../../../database/models/users.model.js";
 
 
 export const getAllPosts = async(req,res,next)=>{

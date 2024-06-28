@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../connection.js";
 import userModel from "./users.model.js";
+import sequelize from "../connection.js";
 
 const postsModel = sequelize.define('post', {
     title:{

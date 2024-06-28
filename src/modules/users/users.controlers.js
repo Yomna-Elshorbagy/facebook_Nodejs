@@ -1,6 +1,6 @@
-import commentsModel from "../../database/models/comments.model.js";
-import postsModel from "../../database/models/posts.models.js";
-import userModel from "../../database/models/users.model.js";
+import commentsModel from "../../../database/models/comments.model.js";
+import userModel from "../../../database/models/users.model.js";
+import postsModel from "../../../database/models/posts.models.js";
 import bcyrpt from 'bcryptjs'
 
 
